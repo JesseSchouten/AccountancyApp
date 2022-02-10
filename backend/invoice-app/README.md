@@ -32,6 +32,13 @@
 $ npm install
 ```
 
+# Before starting:
+
+```bash
+# Setup .env file, see .env-example
+
+```
+
 ## Running the app
 
 ```bash

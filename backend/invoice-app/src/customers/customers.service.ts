@@ -1,23 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Customers } from './entity/customers.entity';
+import { Connection, Repository } from 'typeorm';
+import { Customer } from './entity/customer.entity';
 
 @Injectable()
 export class CustomersService {
   constructor(
-    @InjectRepository(Customers)
-    private customersRepository: Repository<Customers>,
+    @InjectRepository(Customer)
+    private customersRepository: Repository<Customer>,
+    private connection: Connection,
   ) {}
 
-  created() {
-    return 'This ads a new customer to the db.';
-  }
-
-  async getCustomers(_id: number): Promise<Customers[]> {
-    return await this.customersRepository.find({
-      select: ['customer_name'],
-      where: [{ id: _id }],
-    });
+  async created(customer: Customer) {
+    const queryRunner = this.connection.createQueryRunner();
+    await this.customersRepository.save(customer);
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      await queryRunner.manager.save(customer);
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      // since we have errors lets rollback the changes we made
+      await queryRunner.rollbackTransaction();
+      return err;
+    } finally {
+      // you need to release a queryRunner which was manually instantiated
+      await queryRunner.release();
+    }
+    return 'it worked!';
   }
 }

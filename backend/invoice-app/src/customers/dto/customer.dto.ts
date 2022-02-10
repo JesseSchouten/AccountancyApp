@@ -1,28 +1,33 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsString,
-  IsEmail,
-  IsEnum,
-  IsOptional,
-  IsUUID,
-  IsIP,
-  IsNumber,
-} from 'class-validator';
+import { IsString, IsNumber, IsOptional } from 'class-validator';
 
 export class CustomerDto {
-  @ApiProperty({ type: String, description: 'Name of the customer' })
+  @ApiProperty({
+    description: 'Name of the customer',
+    example: 'Apple',
+  })
   @IsString()
-  name: string;
+  customerName: string;
 
-  @ApiProperty({ type: Number, description: 'address of the customer' })
-  @IsNumber()
-  address: number;
+  @ApiProperty({
+    description: 'address of the customer',
+    example: 'Leidseplein 25',
+  })
+  @IsString()
+  address: string;
 
-  @ApiProperty({ type: String, description: 'zip code of the customer' })
+  @ApiProperty({
+    description: 'zip code and address of the customer',
+    example: '1017 PS Amsterdam',
+  })
   @IsString()
   zipCode: string;
 
-  @ApiProperty({ type: String, description: 'VAT number of the customer' })
+  @ApiProperty({
+    description: 'VAT number of the customer',
+    example: 'BTW NL637462350B01',
+  })
+  @IsOptional()
   @IsString()
-  vatNumber: string;
+  vatNumber?: string;
 }
