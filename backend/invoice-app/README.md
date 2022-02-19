@@ -42,8 +42,15 @@ $ npm install
 ## Running the app
 
 ```bash
+# Create the dist folder
+& npm run build
+
 # Start the db
 & npm run start:dev:db
+
+# Migrate the db
+& npm run typeorm:migration:generate
+& npm run typeorm:migration:run
 
 # development
 $ npm run start

@@ -1,14 +1,18 @@
 import { Module } from '@nestjs/common';
-import { CustomersModule } from './customers/customers.module';
+import { CompaniesModule } from './modules/companies/company.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { configService } from './config/config.service';
-import { CustomersHttpModule } from './customers/customers-http.module';
+import { AccountsModule } from './modules/accounts/account.module';
+import { InvoiceElementModule } from './modules/invoice-elements/invoice-element.module';
+import { InvoiceModule } from './modules/invoices/invoice.module';
 
 @Module({
   imports: [
-    CustomersModule,
-    CustomersHttpModule,
+    CompaniesModule,
+    AccountsModule,
+    InvoiceModule,
+    InvoiceElementModule,
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
   ],
 })
