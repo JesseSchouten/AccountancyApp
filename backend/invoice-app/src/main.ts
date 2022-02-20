@@ -9,7 +9,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Invoice App')
     .setDescription('API description for my invoice app')
-    .setVersion('1.0')
+    .setVersion('0.0.1')
     .addTag('Invoices')
     .build();
 

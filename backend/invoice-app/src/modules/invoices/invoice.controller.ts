@@ -26,7 +26,7 @@ export class InvoiceController {
   @Post('/invoice')
   @ApiCreatedResponse({
     status: 201,
-    description: 'Company succesfully logged.',
+    description: 'Invoice succesfully logged.',
   })
   async handleInvoice(
     @Body(new ValidationPipe())

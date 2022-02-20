@@ -24,7 +24,7 @@ export class InvoiceElementController {
   @Post('/invoice-element')
   @ApiCreatedResponse({
     status: 201,
-    description: 'Company succesfully logged.',
+    description: 'Invoice Element succesfully logged.',
   })
   async handleInvoiceElement(
     @Body(new ValidationPipe())
