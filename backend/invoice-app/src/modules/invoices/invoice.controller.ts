@@ -32,11 +32,6 @@ export class InvoiceController {
     @Body(new ValidationPipe())
     invoiceDto: InvoiceDto,
   ) {
-    const invoice = new Invoice();
-    invoice.date = invoiceDto.date;
-    invoice.paymentTerm = invoiceDto.paymentTerm;
-    invoice.account = await this.accountService.findOne(invoiceDto.accountId);
-    invoice.company = await this.companyService.findOne(invoiceDto.companyId);
-    return this.invoiceService.createSingle(invoice);
+    return this.invoiceService.createSingle(invoiceDto);
   }
 }

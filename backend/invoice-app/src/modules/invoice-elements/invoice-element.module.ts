@@ -4,6 +4,7 @@ import { CompaniesModule } from '../companies/company.module';
 import { CompanyService } from '../companies/company.service';
 import { InvoiceModule } from '../invoices/invoice.module';
 import { InvoiceService } from '../invoices/invoice.service';
+import { InvoiceElementMapper } from './dto-to-entity-mapper';
 import { InvoiceElement } from './entity/invoice-element.entity';
 import { InvoiceElementController } from './invoice-element.controller';
 import { InvoiceElementService } from './invoice-element.service';
@@ -15,7 +16,12 @@ import { InvoiceElementService } from './invoice-element.service';
     CompaniesModule,
   ],
   controllers: [InvoiceElementController],
-  providers: [InvoiceElementService, InvoiceService, CompanyService],
-  exports: [TypeOrmModule],
+  providers: [
+    InvoiceElementService,
+    InvoiceService,
+    CompanyService,
+    InvoiceElementMapper,
+  ],
+  exports: [TypeOrmModule, InvoiceElementMapper],
 })
 export class InvoiceElementModule {}

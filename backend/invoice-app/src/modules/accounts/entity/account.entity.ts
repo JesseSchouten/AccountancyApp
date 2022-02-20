@@ -66,7 +66,7 @@ export class Account {
   @ApiProperty({
     example: 'test@outlook.com',
   })
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @ApiProperty({

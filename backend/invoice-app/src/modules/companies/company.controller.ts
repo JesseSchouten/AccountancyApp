@@ -17,10 +17,7 @@ import { AccountService } from '../accounts/account.service';
 @ApiTags('Invoices')
 @Controller('')
 export class CompanyController {
-  constructor(
-    private readonly companyService: CompanyService,
-    private readonly accountService: AccountService,
-  ) {}
+  constructor(private readonly companyService: CompanyService) {}
 
   @Post('/company')
   @ApiCreatedResponse({
@@ -31,12 +28,6 @@ export class CompanyController {
     @Body(new ValidationPipe())
     companyDto: CompanyDto,
   ) {
-    const company = new Company();
-    company.name = companyDto.name;
-    company.address = companyDto.address;
-    company.zipCode = companyDto.zipCode;
-    company.vatNumber = companyDto.vatNumber;
-    company.account = await this.accountService.findOne(companyDto.accountId);
-    return this.companyService.createSingle(company);
+    return this.companyService.createSingle(companyDto);
   }
 }

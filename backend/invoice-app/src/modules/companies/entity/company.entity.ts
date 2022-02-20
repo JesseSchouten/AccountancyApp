@@ -7,9 +7,11 @@ import {
   ManyToOne,
   JoinColumn,
   OneToOne,
+  Unique,
 } from 'typeorm';
 import { Invoice } from '../../../modules/invoices/entity/invoice.entity';
 
+@Unique('uk_company_1', ['name', 'account'])
 @Entity()
 export class Company {
   @PrimaryGeneratedColumn('uuid')

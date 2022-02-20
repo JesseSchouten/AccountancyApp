@@ -2,18 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Invoice } from './entity/invoice.entity';
 import { Connection, Repository } from 'typeorm';
+import { InvoiceMapper } from './dto-to-entity-mapper';
+import { InvoiceDto } from './dto/invoice.dto';
 
 @Injectable()
 export class InvoiceService {
   constructor(
     @InjectRepository(Invoice)
     private invoiceRepository: Repository<Invoice>,
+    private invoiceMapper: InvoiceMapper,
   ) {}
 
-  async createSingle(invoice: Invoice) {
-    //Do retries heres
+  async createSingle(invoiceDto: InvoiceDto) {
     try {
-      await this.invoiceRepository.save(invoice);
+      const invoice = this.invoiceMapper.mapCompanyDtoToEntity(invoiceDto);
+      await this.invoiceRepository.save(await invoice);
     } catch (err) {
       return { message: err };
     }

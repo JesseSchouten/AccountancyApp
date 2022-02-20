@@ -30,17 +30,6 @@ export class InvoiceElementController {
     @Body(new ValidationPipe())
     invoiceElementDto: InvoiceElementDto,
   ) {
-    const invoiceElement = new InvoiceElement();
-    invoiceElement.invoice = await this.invoiceService.findOne(
-      invoiceElementDto.invoiceId,
-    );
-    invoiceElement.description = invoiceElementDto.description;
-    invoiceElement.quantity = invoiceElementDto.quantity;
-    invoiceElement.ratePerQuantity = invoiceElementDto.ratePerQuantity;
-    invoiceElement.currency = invoiceElementDto.currency;
-    invoiceElement.vatPercentage = (1 + invoiceElementDto.vatPercentage) / 100;
-    invoiceElement.shiftVat = invoiceElementDto.shiftVat;
-
-    return this.invoiceElementService.createSingle(invoiceElement);
+    return this.invoiceElementService.createSingle(invoiceElementDto);
   }
 }

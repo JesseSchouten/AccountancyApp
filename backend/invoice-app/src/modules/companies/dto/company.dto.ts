@@ -1,7 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNumber, IsOptional } from 'class-validator';
-import { Account } from '../../../modules/accounts/entity/account.entity';
-import { JoinColumn, ManyToOne } from 'typeorm';
+import { IsString, IsOptional } from 'class-validator';
 
 export class CompanyDto {
   @ApiProperty({
