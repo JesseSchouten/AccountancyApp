@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -24,10 +25,20 @@ export class CompanyController {
     status: 201,
     description: 'Company succesfully logged.',
   })
-  async handleCompany(
+  async createSingle(
     @Body(new ValidationPipe())
     companyDto: CompanyDto,
   ) {
     return this.companyService.createSingle(companyDto);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.companyService.findOne(id);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.companyService.remove(id);
   }
 }

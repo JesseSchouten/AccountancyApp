@@ -23,6 +23,10 @@ export class InvoiceService {
     return { message: 'success' };
   }
 
+  async remove(id: string): Promise<void> {
+    await this.invoiceRepository.delete(id);
+  }
+
   findOne(id: string): Promise<Invoice> {
     return this.invoiceRepository.findOne(id);
   }

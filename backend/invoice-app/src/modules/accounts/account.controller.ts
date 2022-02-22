@@ -1,4 +1,12 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ApiCreatedResponse } from '@nestjs/swagger';
 import { ApiTags } from '@nestjs/swagger';
 import { CompanyDto } from '../companies/dto/company.dto';
@@ -16,10 +24,20 @@ export class AccountController {
     status: 201,
     description: 'Account succesfully logged.',
   })
-  async handleAccount(
+  async createSingle(
     @Body(new ValidationPipe())
     accountDto: AccountDto,
   ) {
     return this.accountsService.createSingle(accountDto);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.accountsService.findOne(id);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.accountsService.remove(id);
   }
 }

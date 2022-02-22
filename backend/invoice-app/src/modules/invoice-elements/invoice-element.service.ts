@@ -25,6 +25,10 @@ export class InvoiceElementService {
     return { message: 'success' };
   }
 
+  async remove(id: string): Promise<void> {
+    await this.invoiceElementRepository.delete(id);
+  }
+
   findOne(id: string): Promise<InvoiceElement> {
     return this.invoiceElementRepository.findOne(id);
   }

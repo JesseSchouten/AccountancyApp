@@ -30,10 +30,11 @@ export class CompanyService {
     return { message: 'success' };
   }
 
+  async remove(id: string): Promise<void> {
+    await this.companyRepository.delete(id);
+  }
+
   findOne(id: string): Promise<Company> {
     return this.companyRepository.findOne(id);
   }
-}
-function mapCompanyDtoToEntity() {
-  throw new Error('Function not implemented.');
 }

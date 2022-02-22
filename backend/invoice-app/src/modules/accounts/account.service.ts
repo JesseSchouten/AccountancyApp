@@ -30,6 +30,10 @@ export class AccountService {
     return { message: 'success' };
   }
 
+  async remove(id: string): Promise<void> {
+    await this.accountRepository.delete(id);
+  }
+
   findOne(id: string): Promise<Account> {
     return this.accountRepository.findOne(id);
   }

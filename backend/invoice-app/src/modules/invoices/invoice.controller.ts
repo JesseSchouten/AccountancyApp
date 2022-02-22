@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -28,10 +29,20 @@ export class InvoiceController {
     status: 201,
     description: 'Invoice succesfully logged.',
   })
-  async handleInvoice(
+  async createSingle(
     @Body(new ValidationPipe())
     invoiceDto: InvoiceDto,
   ) {
     return this.invoiceService.createSingle(invoiceDto);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.invoiceService.findOne(id);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.invoiceService.remove(id);
   }
 }
