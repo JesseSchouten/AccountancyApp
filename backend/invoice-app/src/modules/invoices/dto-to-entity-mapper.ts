@@ -12,7 +12,7 @@ export class InvoiceMapper {
     private readonly companyService: CompanyService,
   ) {}
 
-  public async mapCompanyDtoToEntity(invoiceDto: InvoiceDto): Promise<Invoice> {
+  public async mapInvoiceDtoToEntity(invoiceDto: InvoiceDto): Promise<Invoice> {
     const invoice = new Invoice();
     invoice.date = invoiceDto.date;
     invoice.paymentTerm = invoiceDto.paymentTerm;

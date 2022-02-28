@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional } from 'class-validator';
 import { Company } from '../../../modules/companies/entity/company.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Invoice } from '../../../modules/invoices/entity/invoice.entity';

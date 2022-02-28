@@ -2,10 +2,12 @@ import {
   Body,
   Controller,
   Delete,
+  Patch,
   Get,
   Param,
   Post,
   ValidationPipe,
+  Put,
 } from '@nestjs/common';
 import { ApiCreatedResponse } from '@nestjs/swagger';
 import { ApiTags } from '@nestjs/swagger';
@@ -31,13 +33,26 @@ export class AccountController {
     return this.accountsService.createSingle(accountDto);
   }
 
-  @Get(':id')
+  @Get('/account/:id')
   findOne(@Param('id') id: string) {
     return this.accountsService.findOne(id);
   }
 
-  @Delete(':id')
+  @Delete('/account/:id')
   remove(@Param('id') id: string) {
     return this.accountsService.remove(id);
+  }
+
+  @Put('/account/:id')
+  @ApiCreatedResponse({
+    status: 201,
+    description: 'Account succesfully Updated.',
+  })
+  async update(
+    @Param('id') id: string,
+    @Body(new ValidationPipe())
+    accountDto: AccountDto,
+  ) {
+    return await this.accountsService.update(id, accountDto);
   }
 }

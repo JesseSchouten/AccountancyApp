@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiCreatedResponse } from '@nestjs/swagger';
@@ -32,13 +33,26 @@ export class CompanyController {
     return this.companyService.createSingle(companyDto);
   }
 
-  @Get(':id')
+  @Get('/company/:id')
   findOne(@Param('id') id: string) {
     return this.companyService.findOne(id);
   }
 
-  @Delete(':id')
+  @Delete('/company/:id')
   remove(@Param('id') id: string) {
     return this.companyService.remove(id);
+  }
+
+  @Put('/company/:id')
+  @ApiCreatedResponse({
+    status: 201,
+    description: 'Company succesfully Updated.',
+  })
+  async update(
+    @Param('id') id: string,
+    @Body(new ValidationPipe())
+    companyDto: CompanyDto,
+  ) {
+    return await this.companyService.update(id, companyDto);
   }
 }

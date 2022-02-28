@@ -17,7 +17,9 @@ export class InvoiceElementService {
   async createSingle(invoiceElementDto: InvoiceElementDto) {
     try {
       const invoiceElement =
-        this.invoiceElementMapper.mapCompanyDtoToEntity(invoiceElementDto);
+        this.invoiceElementMapper.mapInvoiceElementDtoToEntity(
+          invoiceElementDto,
+        );
       await this.invoiceElementRepository.save(await invoiceElement);
     } catch (err) {
       return { message: err };
@@ -31,5 +33,18 @@ export class InvoiceElementService {
 
   findOne(id: string): Promise<InvoiceElement> {
     return this.invoiceElementRepository.findOne(id);
+  }
+
+  async update(id: string, invoiceElementDto: InvoiceElementDto) {
+    try {
+      const invoiceElement =
+        await this.invoiceElementMapper.mapInvoiceElementDtoToEntity(
+          invoiceElementDto,
+        );
+      await this.invoiceElementRepository.update({ id: id }, invoiceElement);
+    } catch (err) {
+      throw err;
+    }
+    return { message: 'success' };
   }
 }

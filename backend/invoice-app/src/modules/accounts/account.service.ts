@@ -37,4 +37,16 @@ export class AccountService {
   findOne(id: string): Promise<Account> {
     return this.accountRepository.findOne(id);
   }
+
+  async update(id: string, accountDto: AccountDto) {
+    try {
+      const account = await this.accountMapper.mapAccountDtoToEntity(
+        accountDto,
+      );
+      await this.accountRepository.update({ id: id }, account);
+    } catch (err) {
+      throw err;
+    }
+    return { message: 'success' };
+  }
 }

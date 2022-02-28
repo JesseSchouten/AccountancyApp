@@ -37,4 +37,16 @@ export class CompanyService {
   findOne(id: string): Promise<Company> {
     return this.companyRepository.findOne(id);
   }
+
+  async update(id: string, companyDto: CompanyDto) {
+    try {
+      const company = await this.companyMapper.mapCompanyDtoToEntity(
+        companyDto,
+      );
+      await this.companyRepository.update({ id: id }, company);
+    } catch (err) {
+      throw err;
+    }
+    return { message: 'success' };
+  }
 }

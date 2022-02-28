@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiCreatedResponse } from '@nestjs/swagger';
@@ -34,13 +35,26 @@ export class InvoiceElementController {
     return this.invoiceElementService.createSingle(invoiceElementDto);
   }
 
-  @Get(':id')
+  @Get('/invoice-element/:id')
   findOne(@Param('id') id: string) {
     return this.invoiceElementService.findOne(id);
   }
 
-  @Delete(':id')
+  @Delete('/invoice-element/:id')
   remove(@Param('id') id: string) {
     return this.invoiceElementService.remove(id);
+  }
+
+  @Put('/invoice-element/:id')
+  @ApiCreatedResponse({
+    status: 201,
+    description: 'Invoice Element succesfully Updated.',
+  })
+  async update(
+    @Param('id') id: string,
+    @Body(new ValidationPipe())
+    invoiceElementDto: InvoiceElementDto,
+  ) {
+    return await this.invoiceElementService.update(id, invoiceElementDto);
   }
 }

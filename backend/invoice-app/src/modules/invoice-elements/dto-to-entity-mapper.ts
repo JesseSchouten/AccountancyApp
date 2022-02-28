@@ -7,7 +7,7 @@ import { InvoiceElement } from './entity/invoice-element.entity';
 export class InvoiceElementMapper {
   constructor(private readonly invoiceService: InvoiceService) {}
 
-  public async mapCompanyDtoToEntity(
+  public async mapInvoiceElementDtoToEntity(
     invoiceElementDto: InvoiceElementDto,
   ): Promise<InvoiceElement> {
     const invoiceElement = new InvoiceElement();
