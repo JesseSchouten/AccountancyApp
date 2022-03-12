@@ -6,6 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.setGlobalPrefix('');
+  app.enableCors();
   const config = new DocumentBuilder()
     .setTitle('Invoice App')
     .setDescription('API description for my invoice app')
@@ -17,6 +18,6 @@ async function bootstrap() {
 
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  await app.listen(8000);
 }
 bootstrap();

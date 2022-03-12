@@ -1,8 +1,10 @@
 # AccountancyApp
 
-TODO:
+## Description
 
-- Change base route to api/invoice, nicer name then AccountController_handleAccount
-- Updates for tables with unique keys. -> Account and Company
+This is a simple app to create invoices. The backend is written in NestJS, whilst the frontend is written in React.
+
+## TODO:
+
 - Create some basic front end
 - JWT tokens and access management
